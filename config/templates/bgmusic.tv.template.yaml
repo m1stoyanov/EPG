@@ -1,0 +1,38 @@
+---
+version: 1.0
+author: Hristo Genev
+
+date-parameter:
+  format: list
+  list: [ 1,2,3,4,5,6,7 ]
+  # The date-list-type can be absolute or relative. The default value if omitted is relative
+  # Relative means, that values from date-list will be used from the first value on. If you 
+  # started grabbing on Wednesday, then Wednesday will be 1, Thursday will be 2 etc.
+  # Absolute means, that values from date-list will be used as per the current day of the week index
+  # i.e. if today is Tuesday (the second day of the week), the grabber will use the second value from the date-list.
+  # when it starts grabbing programs for the 3-rd day of the week, the 3-rd value will be used and so forth.
+  list-type: absolute
+
+request:
+  url: https://bgmusic.tv/program/
+
+programs:
+  locator: .qt-show-schedule .qt-show-schedule-day:nth-of-type(${date}) .col
+
+elements:
+
+  - name: start
+    locator: .qt-time
+
+  - name: title
+    locator: .qt-item-title
+
+  - name: desc
+    locator: .qt-ellipsis-2
+    operations:
+      - name: beautify
+        hook: after
+      - name: remove
+        hook: after
+        arguments: [ "[...]" ]
+

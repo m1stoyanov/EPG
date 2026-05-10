@@ -1,0 +1,63 @@
+---
+author: Hristo Genev
+
+request:
+  url: https://${host}/wp-admin/admin-ajax.php
+  http-method: POST
+  debug: false
+  cache-lifetime: 0
+  # body: action=extvs_get_schedule_simple&param_shortcode=%7B%22style%22%3A%222%22%2C%22fullcontent_in%22%3A%22collapse%22%2C%22show_image%22%3A%22show%22%2C%22channel%22%3A%22%5Cu0410%5Cu0433%5Cu0440%5Cu043e+%5Cu0422%5Cu0412%22%2C%22slidesshow%22%3A%22%22%2C%22slidesscroll%22%3A%22%22%2C%22start_on%22%3A%22%22%2C%22before_today%22%3A%223%22%2C%22after_today%22%3A%229%22%2C%22order%22%3A%22ASC%22%2C%22orderby%22%3A%22date%22%2C%22meta_key%22%3A%22%22%2C%22meta_value%22%3A%22%22%2C%22ID%22%3A%22ex-9810%22%7D&date=1754006400&chanel=%D0%90%D0%B3%D1%80%D0%BE+%D0%A2%D0%92
+  body: action=extvs_get_schedule_simple&param_shortcode=%7B%22style%22%3A%222%22%2C%22fullcontent_in%22%3A%22collapse%22%2C%22show_image%22%3A%22show%22%2C%22channel%22%3A%22${channelName}%22%2C%22slidesshow%22%3A%22%22%2C%22slidesscroll%22%3A%22%22%2C%22start_on%22%3A%22%22%2C%22before_today%22%3A%22%22%2C%22after_today%22%3A%22%22%2C%22list_dates%22%3A%22%22%2C%22order%22%3A%22DESC%22%2C%22orderby%22%3A%22date%22%2C%22meta_key%22%3A%22%22%2C%22meta_value%22%3A%22%22%2C%22order_channel%22%3A%22%22%2C%22class%22%3A%22%22%2C%22ID%22%3A%22${id}%22%7D&date=${date.addHours(5).format(unix)}&chanel=${channelId}
+  # body-params: 
+  #   action: extvs_get_schedule_simple
+  #   param_shortcode: "{\"style\":\"2\",\"fullcontent_in\":\"collapse\",\"show_image\":\"show\",\"channel\":\"${channelName}\",\"slidesshow\":\"\",\"slidesscroll\":\"\",\"start_on\":\"\",\"before_today\":\"\",\"after_today\":\"\",\"list_dates\":\"\",\"order\":\"DESC\",\"orderby\":\"date\",\"meta_key\":\"\",\"meta_value\":\"\",\"order_channel\":\"\",\"class\":\"\",\"ID\":\"${id}\"}"
+  #   date: ${date.addHours(5).format(unix)}
+  #   chanel: ${channelId}
+
+  headers: 
+    Content-Type: application/x-www-form-urlencoded
+    Accept: application/json, text/javascript, */*; q=0.01
+    Referer: https://${host}/programa/
+    X-Requested-With: XMLHttpRequest
+  operations:
+    - name: regex-unescape
+      hook: after
+
+programs:
+  debug: true
+  locator-strategy: csspath
+  locator: tr
+
+elements:
+  - name: title
+    locator: h3
+
+  - name: start
+    locator: span
+
+  - name: desc
+    locator: figure span, figure p
+    max: 1
+
+channel-parameters:
+  codehealth.bg:
+    id: ex-6610
+    channelName: Code Health
+    channelId: code-health
+    host: codehealth.bg
+  codefashion.bg:
+    id: ex-5968
+    channelName: Code Fashion
+    channelId: code-fashion
+    host: codefashion.bg
+  agrotv.bg:
+    id: ex-9810
+    channelName: "%5Cu0410%5Cu0433%5Cu0440%5Cu043e+%5Cu0422%5Cu0412"
+    channelId: "%D0%90%D0%B3%D1%80%D0%BE+%D0%A2%D0%92"
+    # channelId: Агро+ТВ
+    host: agrotv.bg
+  evrokom.bg:
+    id: ex-3977
+    channelName: televiziya-evrokom
+    channelId: televiziya-evrokom
+    host: eurocom.bg

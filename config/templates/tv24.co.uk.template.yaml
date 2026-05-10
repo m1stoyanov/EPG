@@ -1,0 +1,55 @@
+---
+author: Hristo Genev
+
+date-parameter:
+  format: yyyy-MM-dd
+
+request:
+  url: https://tv24.co.uk/x/channel/${channelId}/120/${date}
+
+programs:
+  locator: li
+    
+elements:
+  - name: start
+    locator: .time
+    
+  - name: subTitle
+    locator: .desc
+    debug: true
+    # prefix the sub title with hyphen (if there is a valid sub title)
+    operations:
+      - name: prefix
+        hook: after
+        arguments: [ " - " ]
+        conditions: [ value-not-empty ]
+        debug: true
+
+  - name: title
+    locator: h3
+    # append the sub title if it contains value
+    operations:
+      - name: append
+        hook: after
+        arguments: [ "${subTitle}" ]
+        conditions: [ argument-not-empty ]
+        debug: true
+
+  - name: desc
+    locator: p
+
+channel-parameters:    
+  travelxp.eu:
+    channelId: travelxp-europe
+  bbcworldnews.com:
+    channelId: bbc-news
+  nova.bg:
+    channelId: nova%20tv
+  aljazeera.com:
+    channelId: al-jazeera-english
+  france24.com:
+    channelId: france-24-english-hd
+  telesur.es:
+    channelId: telesur
+  cgtndocumentary.en:
+    channelId: cgtn-documentary-hd

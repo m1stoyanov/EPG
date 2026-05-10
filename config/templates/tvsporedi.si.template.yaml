@@ -1,0 +1,470 @@
+---
+version: 1.0
+author: Hristo Genev
+max-days: 3
+timezone: Europe/Ljubljana
+
+date-parameter:
+  format: list
+  list: [ 1,2,3 ]
+
+request:
+  url: https://www.tvsporedi.si/spored.php?urr=040000&id=${channelId}
+  operations: 
+    - name: remove
+      hook: after
+      arguments: [ "<div class=\"clear\"></div>" ]
+
+programs:
+  locator-strategy: xpath
+  locator: (//div[@class="schedule"])[${date}]/div
+
+elements:
+
+  - name: start
+    locator-strategy: csspath
+    locator: .time
+
+  - name: title
+    locator-strategy: csspath
+    locator: .prog
+
+  - name: desc
+    locator-strategy: csspath
+    locator: .desc
+
+channel-parameters:
+  englishclub.tv:
+    channelId: English%20Club%20TV
+  travelxp.eu:
+    channelId: Travelxp%20HD
+  'Aktual TV':
+    channelId: Aktual TV
+  'Arena Sport 1':
+    channelId: Arena Sport 1
+  'Arena Sport 1 Premium':
+    channelId: Arena Sport 1 Premium
+  'Arena Sport 2':
+    channelId: Arena Sport 2
+  'Arena Sport 3':
+    channelId: Arena Sport 3
+  'Arena Sport 4':
+    channelId: Arena Sport 4
+  Astra:
+    channelId: Astra
+  Brio:
+    channelId: Brio
+  'Brio HD':
+    channelId: Brio HD
+  'Gold TV':
+    channelId: Gold TV
+  'Kanal A':
+    channelId: Kanal A
+  'Kanal A HD':
+    channelId: Kanal A HD
+  Kino:
+    channelId: Kino
+  'Kino HD':
+    channelId: Kino HD
+  Minimax:
+    channelId: Minimax
+  'MMC TV':
+    channelId: MMC TV
+  'MTV Adria':
+    channelId: MTV Adria
+  'Net TV':
+    channelId: Net TV
+  'Nova24TV HD':
+    channelId: Nova24TV HD
+  Oto:
+    channelId: Oto
+  'OTO HD':
+    channelId: OTO HD
+  'Planet 2 HD':
+    channelId: Planet 2 HD
+  'Planet Eva HD':
+    channelId: Planet Eva HD
+  'Planet TV':
+    channelId: Planet TV
+  'Planet TV HD':
+    channelId: Planet TV HD
+  'POP HD':
+    channelId: POP HD
+  'POP TV':
+    channelId: POP TV
+  'SK 1':
+    channelId: SK 1
+  'SK 1 HD':
+    channelId: SK 1 HD
+  'SK 2':
+    channelId: SK 2
+  'SK 2 HD':
+    channelId: SK 2 HD
+  'SK 3':
+    channelId: SK 3
+  'SK 3 HD':
+    channelId: SK 3 HD
+  'SK 4':
+    channelId: SK 4
+  'SK 4K':
+    channelId: SK 4K
+  'SK 5':
+    channelId: SK 5
+  'SK 6':
+    channelId: SK 6
+  'SK Golf':
+    channelId: SK Golf
+  'SK Golf HD':
+    channelId: SK Golf HD
+  'SK HD':
+    channelId: SK HD
+  'SLO 1':
+    channelId: SLO 1
+  'SLO 2':
+    channelId: SLO 2
+  'SLO 3':
+    channelId: SLO 3
+  'Sport TV1':
+    channelId: Sport TV1
+  'Sport TV2':
+    channelId: Sport TV2
+  'Sport TV3':
+    channelId: Sport TV3
+  'TV Arena':
+    channelId: TV Arena
+  'TV3 Medias':
+    channelId: TV3 Medias
+  'Veseljak TV':
+    channelId: Veseljak TV
+  24Kitchen:
+    channelId: 24Kitchen
+  AMC:
+    channelId: AMC
+  'Animal Planet':
+    channelId: Animal Planet
+  'Animal Planet HD':
+    channelId: Animal Planet HD
+  'AXN Adria':
+    channelId: AXN Adria
+  'AXN Spin':
+    channelId: AXN Spin
+  'BBC Earth':
+    channelId: BBC Earth
+  Cinemax:
+    channelId: Cinemax
+  'Cinemax 2':
+    channelId: Cinemax 2
+  Cinestar:
+    channelId: Cinestar
+  'Cinestar action-thriller':
+    channelId: Cinestar action-thriller
+  'Cinestar Comedy':
+    channelId: Cinestar Comedy
+  'Cinestar Fantasy':
+    channelId: Cinestar Fantasy
+  'Cinestar Premiere 1 HD':
+    channelId: Cinestar Premiere 1 HD
+  'Cinestar Premiere 2 HD':
+    channelId: Cinestar Premiere 2 HD
+  'Cinestar TV2':
+    channelId: Cinestar TV2
+  'Crime and Investigation':
+    channelId: Crime and Investigation
+  'Da Vinci learning':
+    channelId: Da Vinci learning
+  Discovery:
+    channelId: Discovery
+  'Discovery ID':
+    channelId: Discovery ID
+  DIVA:
+    channelId: DIVA
+  'DOX TV':
+    channelId: DOX TV
+  'E! Europe':
+    channelId: E! Europe
+  'Epic Drama':
+    channelId: Epic Drama
+  'Ginx TV':
+    channelId: Ginx TV
+  HBO:
+    channelId: HBO
+  'HBO 2':
+    channelId: HBO 2
+  'HBO 3':
+    channelId: HBO 3
+  HGTV:
+    channelId: HGTV
+  'History 2 HD':
+    channelId: History 2 HD
+  'History Channel':
+    channelId: History Channel
+  'History HD':
+    channelId: History HD
+  'National Geographic':
+    channelId: National Geographic
+  Nickelodeon:
+    channelId: Nickelodeon
+  SciFi:
+    channelId: SciFi
+  Star:
+    channelId: Star
+  'Star Crime':
+    channelId: Star Crime
+  'Star Life':
+    channelId: Star Life
+  'Star Movies':
+    channelId: Star Movies
+  'TLC Balkan':
+    channelId: TLC Balkan
+  Travel:
+    channelId: Travel
+  'Travel HD':
+    channelId: Travel HD
+  'TV 1000':
+    channelId: TV 1000
+  'Viasat Explore':
+    channelId: Viasat Explore
+  'Viasat History':
+    channelId: Viasat History
+  'Viasat Nature':
+    channelId: Viasat Nature
+  'Viasat True Crime':
+    channelId: Viasat True Crime
+  GTV:
+    channelId: GTV
+  RTS:
+    channelId: RTS
+  'TV Maribor':
+    channelId: TV Maribor
+  'Vas kanal':
+    channelId: Vas kanal
+  VTV:
+    channelId: VTV
+  'Al Jazeera Balkans':
+    channelId: Al Jazeera Balkans
+  'DM Sat':
+    channelId: DM Sat
+  'DOKU TV':
+    channelId: DOKU TV
+  'Hayat HD':
+    channelId: Hayat HD
+  hayatmusic.rs:
+    channelId: Hayat TV
+  'HTV 1':
+    channelId: HTV 1
+  'HTV 2':
+    channelId: HTV 2
+  'HTV 3':
+    channelId: HTV 3
+  'HTV 4':
+    channelId: HTV 4
+  'HTV 5':
+    channelId: HTV 5
+  KlasikTV:
+    channelId: KlasikTV
+  'Lov in ribolov':
+    channelId: Lov in ribolov
+  'NOVA TV':
+    channelId: NOVA TV
+  OBN:
+    channelId: OBN
+  'Pink Plus':
+    channelId: Pink Plus
+  'Pink SI':
+    channelId: Pink SI
+  'RTCG Sat':
+    channelId: RTCG Sat
+  'RTL 2hr':
+    channelId: RTL 2hr
+  'RTL Adria':
+    channelId: RTL Adria
+  'RTL Crime':
+    channelId: RTL Crime
+  'RTL Kockica':
+    channelId: RTL Kockica
+  'RTL Living':
+    channelId: RTL Living
+  'RTL Passion':
+    channelId: RTL Passion
+  'RTL Televizija':
+    channelId: RTL Televizija
+  'RTS 1':
+    channelId: RTS 1
+  'RTS 2':
+    channelId: RTS 2
+  'RTS 3':
+    channelId: RTS 3
+  'RTS Drama':
+    channelId: RTS Drama
+  'RTS Nauka':
+    channelId: RTS Nauka
+  'RTS Svet':
+    channelId: RTS Svet
+  'RTS Trezor':
+    channelId: RTS Trezor
+  'Baby First':
+    channelId: Baby First
+  'BBC First':
+    channelId: BBC First
+  bbcworldnews.com:
+    channelId: BBC World
+  boomerang:
+    channelId: Boomerang
+  Cartoon:
+    channelId: Cartoon
+  cgtn.cn:
+    channelId: CGTN
+  clubmtv.com:
+    channelId: Club MTV
+  cnbc.com:
+    channelId: CNBC Europe
+  cnninternational.com:
+    channelId: CNNI
+  'Discovery Science':
+    channelId: Discovery Science
+  'Disney Channel':
+    channelId: Disney Channel
+  'Disney Junior':
+    channelId: Disney Junior
+  euronews.com:
+    channelId: Euronews
+  'Eurosport 1':
+    channelId: Eurosport 1
+  'Eurosport 1HD':
+    channelId: Eurosport 1HD
+  'Eurosport 2':
+    channelId: Eurosport 2
+  'Eurosport 2 HD':
+    channelId: Eurosport 2 HD
+  'Eurosport 4K':
+    channelId: Eurosport 4K
+  extremesportschannel.com:
+    channelId: Extreme Sports
+  'Fashion TV':
+    channelId: Fashion TV
+  'Food Network HD':
+    channelId: Food Network HD
+  france24.com:
+    channelId: France 24A
+  hustlerhd.com:
+    channelId: Hustler HD
+  hustlertv.com:
+    channelId: Hustler TV
+  iconcert.stingray.com:
+    channelId: iConcerts%20HD
+  JimJam:
+    channelId: JimJam
+  luxe.tv:
+    channelId: LUXE.TV HD
+  mtv00s.com:
+    channelId: MTV 00s
+  mtv80s.com:
+    channelId: MTV 80s
+  mtv90s.com:
+    channelId: MTV 90s
+  mtveurope.com:
+    channelId: MTV Euro
+  mtvhits.com:
+    channelId: MTV Hits
+  mtvlive.com:
+    channelId: MTV Live HD
+  'myZen.tv HD':
+    channelId: myZen.tv HD
+  'National Geographic Wild':
+    channelId: National Geographic Wild
+  'Nautical Channel':
+    channelId: Nautical Channel
+  'NGC HD':
+    channelId: NGC HD
+  'Nickelodeon HD':
+    channelId: Nickelodeon HD
+  'Private TV':
+    channelId: Private TV
+  'Sky News':
+    channelId: Sky News
+  '3 SAT':
+    channelId: 3 SAT
+  Anixe:
+    channelId: Anixe
+  ARD:
+    channelId: ARD
+  ARTE:
+    channelId: ARTE
+  'Kabel 1':
+    channelId: Kabel 1
+  'ORF 1':
+    channelId: ORF 1
+  'ORF 2':
+    channelId: ORF 2
+  'ORF 3':
+    channelId: ORF 3
+  'ORF Sport plus':
+    channelId: ORF Sport plus
+  'PRO 7':
+    channelId: PRO 7
+  RTL:
+    channelId: RTL
+  'RTL 2':
+    channelId: RTL 2
+  'SAT 1':
+    channelId: SAT 1
+  Sport1:
+    channelId: Sport1
+  SRTL:
+    channelId: SRTL
+  'Tele 5':
+    channelId: Tele 5
+  VOX:
+    channelId: VOX
+  ZDF:
+    channelId: ZDF
+  'Canale 5':
+    channelId: Canale 5
+  'Italia 1':
+    channelId: Italia 1
+  'RAI 1':
+    channelId: RAI 1
+  'RAI 2':
+    channelId: RAI 2
+  'RAI 3':
+    channelId: RAI 3
+  'RAI 4':
+    channelId: RAI 4
+  'RAI 5':
+    channelId: RAI 5
+  'RAI Movie':
+    channelId: RAI Movie
+  'RAI SportPiu HD':
+    channelId: RAI SportPiu HD
+  'Rete 4':
+    channelId: Rete 4
+  'TV Koper':
+    channelId: TV Koper
+  'Duna TV':
+    channelId: Duna TV
+  france2.fr:
+    channelId: France 2
+  france24.fr:
+    channelId: France 24
+  'Madzarska 1':
+    channelId: Madzarska 1
+  'Madzarska 2':
+    channelId: Madzarska 2
+  mezzo.tv:
+    channelId: Mezzo
+  mezzolive.tv:
+    channelId: Mezzo liveHD
+  RT:
+    channelId: RT
+  tv5monde.fr:
+    channelId: TV5MONDE
+
+channel-extract-rules:
+ url: https://www.tvsporedi.si/spored.php
+ channel-name:
+   locator: .squared span
+   locator-strategy: csspath
+ channel-param: 
+   locator-strategy: csspath
+   locator: .squared a
+   property: href

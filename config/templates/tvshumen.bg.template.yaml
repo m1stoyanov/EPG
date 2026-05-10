@@ -1,0 +1,32 @@
+---
+author: Hristo Genev
+
+week-overflow: false
+
+date-parameter:
+  format: list
+  list: [ 1,2,3,4,5,6,7 ]
+
+
+request:
+  url: https://tvshumen.bg/sedmichna-programa/
+   
+programs:
+  locator: ((//*[@class='eael-tabs-content'])[2]/div)[${date}]
+  locator-strategy: xpath
+  separator: <br>
+  property: innerHtml
+  debug: true
+
+elements:
+  - name: start
+    locator-strategy: regex
+    locator: \d\d:\d\d
+
+  - name: title
+    locator: .*
+    locator-strategy: regex
+    operations: 
+      - name: regex-remove
+        hook: after
+        arguments: [ \d\d:\d\d\s* ]

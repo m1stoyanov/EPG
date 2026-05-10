@@ -1,0 +1,40 @@
+---
+author: Hristo Genev
+
+date-parameter:
+  format: dd. MM. yyyy
+
+request:
+  url: https://nostalgia.bg/tvschedule1.html
+  operations:
+    # since the page contains programs for a whole month, 
+    # use regex to extract the text block that contains programs for 4 days
+    - name: regex-extract
+      hook: after
+      arguments: [ "${date}\\s*</b></span>(.*?)${date.addDays(4)}" ]
+      debug: false
+    # remove all HTML tags to clean up the text except for <br /> which will be used as a delimiter
+    - name: regex-remove
+      hook: after
+      arguments: [ "<(?!br\\s*\\/?)[^>]+>" ]
+      debug: false
+   
+programs:
+  # locator: <b>\s*\d\d:\d\d\s*</b>.*?<br /><br />
+  locator: \d\d:\d\d.*?<br /><br />
+  locator-strategy: regex
+  debug: true
+
+elements:
+  - name: start
+    locator: \d\d:\d\d
+
+  - name: title
+    locator: .*
+    operations: 
+      - name: regex-remove
+        hook: after
+        arguments: [ \d\d:\d\d\s* ]
+      - name: replace
+        hook: after
+        arguments: [ <br />, " " ]

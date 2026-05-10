@@ -1,0 +1,45 @@
+---
+version: 1.0
+author: Hristo Genev
+culture: en-US
+timezone: Europe/Prague
+
+date-parameter:
+  format: yyyy-MM-dd
+
+request:
+  debug: false
+  url: https://m.tv.sms.cz/mobilni/tvp/?stanice=${channelId}&den=${date}
+
+programs:
+  debug: false
+  locator: .porad 
+    
+elements:
+  - name: start
+    debug: false
+    time-format: HH.mm
+    locator: .cas
+
+  - name: title
+    debug: false
+    locator: a.nazev > div:nth-of-type(1)
+
+  - name: desc
+    locator: .detail
+
+channel-parameters:
+  skynews.uk:
+    channelId: Sky+news
+  aljazeera.com:
+    channelId: Al+Jazeera
+  bbcworldnews.com:
+    channelId: BBC+World+Nsews
+  france24.com:
+    channelId: France24+EN
+  nhkworld.com:
+    channelId: NHK+World+TV
+  cctv4.com:
+    channelId: CCTV4+Europe
+  deutschewelle.de:
+    channelId: Deutsche+Welle

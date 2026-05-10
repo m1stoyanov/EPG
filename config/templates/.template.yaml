@@ -1,0 +1,39 @@
+﻿---
+author: Hristo Genev
+
+date-parameter:
+  format: YYYYMMdd
+
+request:
+  url: https://localhost.home/${date}
+
+programs:
+  locator: .prg
+
+elements:
+  - name: start
+    debug: true
+    locator: .time
+
+  - name: title
+    locator: .ttl
+
+  - name: detailsUrl
+    locator: a
+    attribute: href
+
+program-details:
+  request:
+    url: '${detailsUrl}'
+
+  elements:
+    - name: desc
+      locator: .ext-details
+    - name: date
+      locator: .year
+
+
+channel-parameters:
+  channel1.id:
+    channelId: 1
+    channelUrl: program-for-a-single-day.html 

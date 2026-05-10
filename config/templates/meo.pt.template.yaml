@@ -1,0 +1,76 @@
+---
+author: Hristo Genev
+
+date-parameter:
+  format: list
+  list: [ 0, 1, 2, 3, 4, 5, 6 ]
+
+request:
+  debug: false
+  # The with-browser option will cause the page to be opened, evaluated and downloaded by a real browser instance
+  # This is useful in cases where a heavy JS code is used to generate the program and it can be extracted from the JS/JSON resource
+  with-browser: true
+  url: https://www.meo.pt/tv/canais-programacao/guia-tv?canal=${channelId}
+  # The browser-actions list contains actions that should be executed in order to navigate to the daily programs
+  # in the case below, we click on the day identifier in the menu
+  browser-actions:
+    - type: click
+      locator: "a[data-id='${date}']"
+      on-failure: break
+      locator-timeout: 15000
+      wait-after: 3000
+      wait-before: 1000
+
+programs:
+  locator: .program-detail
+
+elements:
+  - name: today-show-validator
+    attribute: data-date
+    operations:
+      # Some of the early program blocks contain programs from the previous day
+      # So we create this validation, if found, the block will be skipped and no program will be extracted from it.
+      - name: validate-text-not-exist
+        arguments: [ "${date.addDays(-1).format(d-M-yyyy))}" ]
+        on-failure: break
+
+  - name: title
+    locator: h4
+
+  - name: start
+    attribute: data-hour
+
+  - name: stop
+    attribute: data-hourend
+
+channel-parameters:
+  tve.es:
+    channelId: TVEIHD
+  rtp1.pt:
+    channelId: RTP1
+  cgtn.cn:
+    channelId: CGTNHD
+  cgtndocumentary.en:
+    channelId: CGTNDHD
+  cctv4.com:
+    channelId: CCTV4HD
+  france24.com:
+    channelId: FR24I
+  france24.fr:
+    channelId: FR24F
+  englishclub.com:
+    channelId: ENGLISH
+  mcmpop.fr:
+    channelId: MCM%20P
+  mcmtop.fr:
+    channelId: MCMTHD
+  travelxp.eu:
+    channelId: TRAXP
+  24horas.es:
+    channelId: TVE24HD
+  freedom.ua:
+    channelId: FREEDOM
+  1plus1.ua:
+    channelId: 1E1INT
+  arirang.tv:
+    channelId: ARIRANG

@@ -1,0 +1,57 @@
+﻿---
+author: Hristo Genev
+
+date-parameter:
+  format: ddMMyyyy
+
+request:
+  url: https://tv.boxbg.net/channel/${channelUrl}/${channelId}?${date}
+  # with-browser: true
+  # debug: true
+  operations:
+    - name: regex-unescape
+      hook: after
+      debug: false
+
+programs:
+  locator: .list-events a
+  debug: true
+
+elements:
+  - name: start
+    debug: false
+    locator-strategy: regex
+    locator: start_at&quot;\:&quot;(.*?)&quot;,
+    time-format: yyyy-MM-dd HH:mm:00
+    
+
+  - name: title
+    debug: false
+    locator-strategy: regex
+    locator: text&quot;\:&quot;(.*?)&quot;,
+    operations: 
+      - name: replace
+        arguments: [ "&quot;", "\"" ]
+
+#   - name: detailsUrl
+#     locator: a
+#     attribute: href
+
+# program-details:
+#   request:
+#     url: '${detailsUrl}'
+
+#   elements:
+#     - name: desc
+#       locator: .ext-details
+#     - name: date
+#       locator: .year
+
+
+channel-parameters:
+  btvcinema.bg:
+     channelId: 7
+     channelUrl: bTV Cinema
+  hbo3.bg:
+    channelId: 88
+    channelUrl: HBO Comedy

@@ -1,0 +1,40 @@
+---
+uthor: Hristo Genev
+
+date-parameter:
+  format: yyyy-MM-d
+
+request:
+  url: https://viasatkino.bg/?date=${date}
+
+programs:
+  locator: .schedule-box
+  debug: false
+
+elements:
+  - name: title
+    locator: h3 span
+    debug: false
+    # operations:
+    # - name: remove-after
+    #   hook: after
+    #   arguments: [ ".description", true]
+    # - name: beautify
+    #   hook: after
+  
+  - name: start
+    locator: ul li:nth-of-type(1)
+
+  - name: desc
+    locator: p
+    operations:
+      - name: beautify
+        hook: after
+
+  - name: icon
+    locator: img
+    attribute: src
+
+channel-parameters:
+  kino.viasat.bg:
+    host: viasatkino.bg

@@ -1,0 +1,67 @@
+---
+version: 1.0
+author: Hristo Genev
+culture: fr-FR
+timezone: Europe/Paris
+
+date-parameter:
+  format: yyyy-MM-dd
+
+request:
+  with-browser: true
+  debug: false
+  url: https://programmetv.ouest-france.fr/chaines/programme-tv-${channelId}/?date=${date}&horaire=matin
+
+programs:
+  debug: false
+  locator: li.programme 
+    
+elements:
+  - name: start
+    debug: false
+    locator: .horaire
+
+  - name: title
+    debug: false
+    language: fr
+    locator: .nom
+
+  - name: desc
+    enabled: false
+    locator: .infos
+
+  - name: icon
+    enabled: false
+    locator: img
+
+channel-parameters:
+  tf1.fr:
+    channelId: tf1-192
+  france2.fr:
+    channelId: france-2-4
+  france3.fr:
+    channelId: france-3-80
+  france4.fr:
+    channelId: france-4-78
+  france5.fr:
+    channelId: france-5-47
+  chasseetpeche.fr:
+    channelId: chasse-et-peche-38
+  arte.fr:
+    channelId: arte-111
+  m6.fr:
+    channelId: m6-118
+  c8.fr:
+    channelId: c8-445
+  w9.fr:
+    channelId: w9-119
+  tv5monde.fr:
+    channelId: tv5-monde-fbs-205
+  mcm.fr:
+    channelId: mcm-121
+  bfmbusiness.fr:
+    channelId: bfm-business-1073
+  euronews.fr:
+    channelId: euronews-140
+  6ter.fr:
+    channelId: 6ter-1403

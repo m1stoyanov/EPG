@@ -1,0 +1,40 @@
+---
+version: 1.0
+author: Hristo Genev
+culture: bg-BG
+
+date-parameter:
+  format: list
+  list: [ 2,3,4,5,6,7,8 ]
+  # The date-list-type can be absolute or relative. The default value if omitted is relative
+  # Relative means, that values from date-list will be used from the first value on. If you 
+  # started grabbing on Wednesday, then Wednesday will be 1, Thursday will be 2 etc.
+  # Absolute means, that values from date-list will be used as per the current day of the week index
+  # i.e. if today is Tuesday (the second day of the week), the grabber will use the second value from the date-list.
+  # when it starts grabbing programs for the 3-rd day of the week, the 3-rd value will be used and so forth.
+  list-type: absolute
+
+request:
+  url: https://tv.traveltv.bg/night-shows-this-week/
+
+programs:
+  locator: '#ws-schedule2 .verticalcolumn1:nth-of-type(${date}) .datarow1'
+
+elements:
+
+  - name: title
+    locator: .ws-item-title
+
+  - name: _offsetBlockNumberVar
+    value: 1
+    operations:
+      - name: addition
+        hook: after
+        arguments: [ '${_programBlockNumber}' ]
+
+  - name: start
+    locator-strategy: xpath
+    # Using absolute xpath causes a search in the whole document not only in the program block
+    # so we'll use xpath to find the program timings which happen to be outside of the program block
+    # the 'magic' built-in parameter _programBlockNumber points to the current program block number
+    locator: (//tr[@class="datarow"]/th)[${_programBlockNumber}]

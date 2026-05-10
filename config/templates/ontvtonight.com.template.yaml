@@ -1,0 +1,41 @@
+---
+version: 1.0
+author: Hristo Genev
+timezone: US/Eastern
+
+date-parameter:
+  format: yyyy-MM-dd
+
+request:
+  debug: false
+  url: https://www.ontvtonight.com/guide/listings/channel/${channelId}.html?dt=${date}
+
+programs:
+  debug: false
+  locator: table.table tr
+  exclude-first: 1
+    
+elements:
+  - name: yesterday-show-exist-validator
+    locator: i
+    operations: 
+      - name: validate-text-not-exist
+        arguments: [ "${date.addDays(-1)}" ]
+        on-failure: break
+
+  - name: start
+    debug: false
+    locator: .thin
+
+  - name: title
+    debug: false
+    locator: a
+
+
+channel-parameters:
+  foxsports1.com:
+    channelId: 666266122/fox-sports-1
+  foxsports2.com:
+    channelId: 690446261/fox-sports-2
+  cgtndocumentary.en:
+    channelId: 69025059/mhz6-cgtn-documentary

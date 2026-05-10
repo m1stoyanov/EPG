@@ -1,0 +1,47 @@
+---
+version: 1.0
+author: Hristo Genev
+
+date-parameter:
+  format: yyyyMMdd
+
+request:
+  url: https://www.dnevnik.bg/sled5/tv/${channelId}/${date}/
+  
+programs:
+  # exclude-first: 1
+  locator: .expanded tr
+
+elements:
+  - name: start
+    locator: td:nth-of-type(1)
+    
+  - name: title
+    locator: td:nth-of-type(2)
+
+channel-parameters:
+  amc.bg:
+    channelId: 184_amc
+  cartoonnetwork.tv:
+    channelId: 117_cartoon_network
+  disneychannel.bg:
+    channelId: 210_disney_channel
+  disneyjunior.bg:
+    channelId: 250_Disney%20Jr
+  mezzo.tv:
+    channelId: 271_Mezzo
+  mezzonlive.tv:
+    channelId: 336_Mezzo%20Live%20HD
+  ekids.bg:
+    channelId: 195_eKids
+  fueltv.bg:
+    channelId: 78_Fuel TV
+
+channel-extract-rules:
+ url: https://www.dnes.bg/tv
+ channel-name:
+   locator: select#channel option
+   property: text
+ channel-param: 
+   locator: select#channel option
+   property: value

@@ -1,0 +1,21 @@
+author: Hristo Genev
+
+request:
+  url: http://dstv-bg.com/programa-sm.html
+  # specifying the content encoding of the page is required, otherwise the letters won't get decoded
+  content-encoding: windows-1251
+  debug: false
+  # This program is very unlikely to change, so we set the 
+  # cache-lifetime to 30 days
+  cache-lifetime: 720
+
+
+programs:
+  locator: p
+    
+elements:
+  - name: title
+    locator: .style17
+
+  - name: start
+    locator: .style15

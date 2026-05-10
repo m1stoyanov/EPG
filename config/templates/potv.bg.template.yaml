@@ -1,0 +1,25 @@
+---
+version: 1.0
+author: Hristo Genev
+
+date-parameter:
+  format: list
+  list: [ "", "-2", "-3", "-4", "-5", "-6", "-7" ]
+
+request:
+  url: https://www.potv.bg/tv-programa/${channelUrl}${date}.html
+
+programs:
+  exclude-first: 1
+  locator: .tv-listing > div
+
+elements:
+  - name: start
+    locator: span
+            
+  - name: title
+    locator: .col
+
+channel-parameters:
+  amc.bg:
+    channelUrl: mgm-channel

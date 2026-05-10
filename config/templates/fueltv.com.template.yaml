@@ -1,0 +1,49 @@
+---
+author: Hristo Genev
+timezone: Etc/GMT
+
+date-parameter:
+  format: yyyy-MM-dd
+
+request:
+  url: https://fuel.tv/browse/guide/${date}
+  
+programs:
+  locator: li.epg-item
+  debug: false
+
+elements:
+  - name: start
+    locator: h4
+    attribute: data-dategmt
+    time-format: yyyy-MM-dd HH:mm:ss
+    debug: false
+
+  - name: subTitle
+    debug: false
+    locator: h6 > small
+    
+  - name: showType
+    locator: .mb-2
+
+  - name: title
+    locator: a > h6  
+    operations:
+      - name: prepend
+        arguments: [ "${showType} - " ]
+        conditions: [ argument-not-empty ]
+      - name: append
+        arguments: [ " - ${subTitle}" ]
+        conditions: [ argument-not-empty ]
+  
+  - name: desc
+    debug: false
+    locator: p:nth-of-type(2) > small
+
+  - name: icon
+    locator: img
+    attribute: data-src
+
+channel-parameters:
+  fueltv.com:
+    channelId: Fuel TV

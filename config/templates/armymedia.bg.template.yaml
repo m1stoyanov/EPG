@@ -1,0 +1,34 @@
+---
+version: 1.0
+author: Hristo Genev
+
+date-parameter:
+  format: list
+  debug: true
+  first-day-index: 5
+  list: [ 4,5,6,7,1,2,3 ]
+  list-type: absolute
+
+week-overflow: false
+
+request:
+  url: https://armymedia.bg/седмична-програма/
+  debug: false
+
+programs:
+  locator: .jet-tabs__content:nth-of-type(${date}) p
+  debug: false
+
+elements:
+
+  - name: start
+    locator-strategy: regex
+    locator: "\\d{1,2}[:|\\.]\\d{2}\\s*"
+
+  - name: title
+    operations: 
+      - name: regex-remove
+        hook: after
+        arguments: [ "^\\d{1,2}:\\d{2}\\s*" ]
+      - name: beautify
+        hook: after

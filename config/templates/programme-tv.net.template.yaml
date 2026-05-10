@@ -1,0 +1,65 @@
+---
+version: 1.0
+author: Hristo Genev
+timezone: Europe/Paris
+
+date-parameter:
+  format: yyyy-MM-dd
+
+request:
+  debug: false
+  url: https://www.programme-tv.net/programme/chaine/${date}/programme-${channelUrl}.html
+  headers:
+    Accept-Language: en-US,en;q=0.9
+    accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+
+programs:
+  debug: false
+  locator: .mainBroadcastCard
+    
+elements:
+  - name: start
+    time-format: HH\hmm
+    debug: false
+    locator: .mainBroadcastCard-startingHour
+
+  - name: title
+    debug: false
+    language: fr
+    locator: .mainBroadcastCard-title
+
+channel-parameters:
+  tf1.fr:
+    channelUrl: tf1-19
+  france2.fr:
+    channelUrl: france-2-6
+  france3.fr:
+    channelUrl: france-3-7
+  france4.fr:
+    channelUrl: france-4-8
+  france5.fr:
+    channelUrl: france-5-9
+  arte.fr:
+    channelUrl: arte-337
+  m6.fr:
+    channelUrl: m6-12
+  c8.fr:
+    channelUrl: c8-4
+  w9.fr:
+    channelUrl: w9-24
+  mcmtop.fr:
+    channelUrl: mcm-top-86
+  bfmbusiness.fr:
+    channelUrl: bfmtv-25
+  6ter.fr:
+    channelUrl: 6ter-202
+  chasseetpeche.fr:
+    channelUrl: chasse-et-peche-42
+  tv5monde.fr:
+    channelUrl: tv5monde-128
+  beinsports1.fr:
+    channelUrl: bein-sports-1-183
+  beinsports2.fr:
+    channelUrl: bein-sports-2-184
+  beinsports3.fr:
+    channelUrl: bein-sports-3-265

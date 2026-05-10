@@ -1,0 +1,52 @@
+---
+version: 1.0
+author: Hristo Genev
+culture: bg-BG
+
+date-parameter:
+  format: list  
+  list: [ 2,4,6,8,10,12,14 ]
+week-overflow: false
+
+request:
+  url: https://tvn.bg/programa/
+
+programs:
+  locator: '.elementor-tabs-content-wrapper .elementor-tab-content:nth-of-type(${date}) p'
+
+elements:
+
+  # This element is a guard against grabbing old programs. If the current date is not found
+  # we will skip grabbing. This is needed because often this page does not get updated on time 
+  # and stays old until someone decides to update it in the middle of the week or later
+  # So we define this dummy element with property required=true. 
+  # We try to find a title element with title containing current day's date
+  # If it is not found, then most likely the program is not updated
+  # so we'll cancel the grabbing
+  - name: _stopGrabbingIfNotFound
+    required: true
+    locator-strategy: xpath
+    locator: //*[contains(text(),"${date.format(dd.MM)}")]
+    debug: false
+
+  - name: _text
+    locator: strong
+
+  - name: title
+    value: ${_text}
+    operations:
+      - name: regex-remove
+        hook: after
+        arguments: [ '\d{1,2}:\d\d – ' ]
+
+  - name: desc
+    operations:
+      - name: remove
+        hook: after
+        arguments: [ '${_text}' ]
+
+  - name: start
+    debug: true
+    locator-strategy: regex
+    locator: \d\d:\d\d
+

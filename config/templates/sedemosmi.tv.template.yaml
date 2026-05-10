@@ -1,0 +1,44 @@
+---
+author: Hristo Genev
+date-parameter:
+  format: dddd
+  culture: en-US
+
+request:
+  debug: false
+  url: https://sedemosmi.tv/programata/
+    
+programs:
+  locator: "#${date.lowercase()} .cd-timeline-block"
+    
+elements:
+  - name: start
+    locator: .timeline-content-info-date
+    time-format: HH:mm ч.
+
+  - name: title
+    locator: h2
+
+  - name: detailsUrl
+    locator: a
+    attribute: href
+    operations: 
+      - name: remove
+        arguments: [ "%d0%b2%d0%b8%d0%b4%d0%b5%d0%be/" ]
+
+
+program-details:
+  request: 
+    url: ${detailsUrl}
+  elements:
+    - name: desc
+      locator-strategy: xpath
+      locator: //h2[text()="За предаването"]/../../../div/div/p
+      merge-all: true
+      # locator: (//h2[text()="За предаването"]/../../../div/div)[2]
+      # operations:
+      #   - name: beautify
+      #     hook: after
+      #   - name: regex-remove
+      #     debug: true
+      #     arguments: [ ".*\\}" ]

@@ -1,0 +1,40 @@
+---
+version: 1.0
+author: Hristo Genev
+
+date-parameter:
+  format: list
+  list: [ 1,2,3,4,5,6,7 ]
+  list-type: absolute
+
+week-overflow: true
+
+request:
+  url: https://fentv.bg/тв-програма/
+
+
+programs:
+  locator: .joan-schedule:nth-of-type(${date}) li
+
+elements:
+  - name: start
+    locator: strong:nth-child(1)
+            
+  - name: stop
+    locator: strong:nth-child(2)
+            
+  - name: subtitle
+    operations:
+      - name: regex-remove
+        hook: after
+        arguments: [ '\d{1,2}:\d\d - \d{1,2}:\d\d' ]
+      - name: uncapitalize
+        hook: after
+  
+  - name: title
+    locator: .tit
+    operations:
+      - name: append
+        hook: after
+        arguments: [ " - ${subtitle}" ]
+        conditions: [ "argument-not-empty" ]

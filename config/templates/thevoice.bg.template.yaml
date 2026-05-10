@@ -1,0 +1,46 @@
+---
+version: 1.0
+author: Hristo Genev
+culture: bg-BG
+
+date-parameter:
+  format: yyyy\/MM\/dd
+
+request:
+  url: https://thevoice.bg/schedule/ajax/${channelId}/${date}
+  debug: false
+
+programs:
+  locator: a
+  debug: false
+
+elements:
+  - name: start
+    locator: .timetable-time-begin
+            
+  - name: stop
+    locator: .timetable-time-end
+            
+  - name: title
+    language: bg
+    locator: .timetable-item-title
+
+  - name: detailsUrl
+    attribute: href
+
+program-details:
+  request:
+    url: ${detailsUrl}
+
+  elements:
+    - name: desc
+      locator: "[itemprop='description']"
+      operations:
+        - name: beautify
+          hook: after
+
+channel-parameters:
+  thevoice.bg:
+    channelId: 1
+  thevoiceradio.bg:
+    channelId: 0

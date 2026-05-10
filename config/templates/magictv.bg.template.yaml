@@ -1,0 +1,36 @@
+---
+author: Hristo Genev
+
+date-parameter:
+  format: yyyy/MM/dd
+
+request:
+  url: https://www.magic.bg/schedule/ajax/1/${date}
+
+programs:
+  locator: li
+
+elements:
+  - name: start
+    locator: a span.time:nth-child(1)
+
+  - name: stop
+    locator: a span.time:nth-child(3)
+
+  - name: title
+    locator: .title
+
+  - name: detailsUrl
+    locator: a
+    attribute: href
+
+program-details:
+  request:
+    url: ${detailsUrl}
+    cache-lifetime: -1
+    debug: false
+
+  elements:
+    - name: desc
+      locator: meta[name=description]
+      attribute: content

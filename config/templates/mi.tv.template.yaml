@@ -1,0 +1,33 @@
+---
+author: Hristo Genev
+
+date-parameter:
+  format: yyyy-MM-dd
+
+request:
+  url: https://mi.tv/co/async/channel/${channelUrl}/${date}/120
+
+programs:
+  locator: li
+    
+elements:
+  - name: start
+    locator: .time
+
+  - name: subTitle
+    locator: .sub-title
+
+  - name: title
+    locator: h2
+    operations:
+      - name: append
+        arguments: [ "${subTitle}" ]
+
+  - name: desc
+    locator: .synopsis
+
+channel-parameters:    
+  tve.es:
+    channelUrl: tve
+  24horas.es:
+    channelUrl: tvn-24-h

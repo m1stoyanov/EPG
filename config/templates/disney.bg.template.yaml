@@ -1,0 +1,41 @@
+---
+author: Hristo Genev
+time-zone: utc
+
+date-parameter:
+  format: yyyyMMdd
+  
+
+request:
+  url: https://tv.disney.bg/_schedule/full/${date}/2/${channelUrl}
+  debug: true
+
+programs:
+  debug: false
+  locator: $.schedule[:].schedule_items[:]
+  locator-strategy: jsonpath
+
+elements:
+  - name: start
+    debug: true
+    locator: tx_time
+
+  - name: episode_title  
+    locator: episode_title
+    
+  - name: title  
+    locator: show_title
+    operations: 
+      - name: append
+        hook: after
+        arguments: [ " - ${episode_title}" ]
+        conditions: [ argument-not-empty ]
+  
+  - name: desc
+    locator: description
+      
+channel-parameters:
+  disneychannel.bg:
+    channelUrl: "%2Fwhats-on"
+  disneyjunior.bg:
+    channelUrl: "%2Fwhats-on%2Fdisney-junior"

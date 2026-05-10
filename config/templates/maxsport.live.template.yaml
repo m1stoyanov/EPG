@@ -1,0 +1,28 @@
+---
+version: 1.0
+author: Hristo Genev
+
+date-parameter:
+  format: dd\\.MM
+
+request:
+  url: https://maxsport.live/tv-guide/
+  
+programs:
+  locator: '#${channelId}-panel-${date} .guides-item'
+    
+elements:
+  - name: start
+    locator: .guides-item-time
+  - name: title
+    locator: .guides-item-title
+
+channel-parameters:
+  maxsport1.bg:
+    channelId: tv-340
+  maxsport2.bg:
+    channelId: tv-110
+  maxsport3.bg:
+    channelId: tv-100
+  maxsport4.bg:
+    channelId: tv-90

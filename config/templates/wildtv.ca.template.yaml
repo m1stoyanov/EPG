@@ -1,0 +1,80 @@
+---
+version: 1.0
+author: Hristo Genev
+
+date-parameter:
+  format: list
+  list: [ 2,3,4,5,6,7,8 ]
+  # The date-list-type can be absolute or relative. The default value if omitted is relative
+  # Relative means, that values from date-list will be always used from the first value on
+  # Absolute means, that values from date-list will be used as per the current day of the week index
+  # i.e. if today is Tuesday (the second day of the week), the grabber will use the second value from the date-list.
+  # when it starts grabbing programs for the 3-rd day of the week, the 3-rd value will be used and so forth.
+  list-type: absolute
+
+
+request:
+  url: https://wildtv.ca/schedule
+  # The program elements on this page do not exist in the raw HTML source that is downloaded. 
+  # They are encoded within JavaScript which unfortunately can't be parsed directly. 
+  # For cases like this, we need to use the option 'use-browser' 
+  # It tells the grabber to download the HTML via a real browser instance (by default Google Chrome). 
+  # That is, the source code of the page will get downloaded and parsed by an instance of a real browser. 
+  # Then the resulting HTML will be passed to the AngleSharp parser for element queries and data extraction. 
+  # Important! Usnig a real browser will add an CPU/Memory overhead as a browser instance needs to be spun up. 
+  # If a browser is not found one will be downloaded on the fly.
+  with-browser: true
+
+
+programs:
+  debug: false
+  locator-strategy: xpath
+  # This is a kind of "dummy" locator. Due to the way how this page is structured, 
+  # we need to use an absolute xpath to access the program elements, because for instance 
+  # the start element is completely outside of the program block.
+  # So we don't really need to split the page into program blocks, we only need to know the total program blocks count on the page 
+  # so that the built-in parameter _programBlockNumber which is used to access elements by absolute xpath is correctly calculated.
+  locator: //table/tbody/tr
+
+elements:
+  - name: start
+    debug: false  
+    # The built-in parameter _programBlockNumber contains the current block number 
+    # It gets incremented on each program extraction iteration 
+    # Using absolute xpath causes a search in the whole document not only in the extracted program block
+    # We'll use absolute xpath to find the program timings which are outside of the program block 
+    # and there is no other way to find them.
+    # The 'magic' built-in parameter _programBlockNumber points to the current program block number
+    # which matches the table row number
+    locator: //table/tbody/tr[${_programBlockNumber}]/td[1]
+
+  - name: title
+    debug: false
+    locator: //table/tbody/tr[${_programBlockNumber}]/td[${date}]//a
+
+  - name: detailsUrl
+    debug: false
+    locator: //table/tbody/tr[${_programBlockNumber}]/td[${date}]//a
+    attribute: href
+    operations: 
+      - name: prepend
+        arguments: [ https://wildtv.ca ]
+        conditions: [ value-not-empty]
+
+    
+program-details:
+  request: 
+    url: ${detailsUrl}
+    # Cache lifetime in hours.
+    # If negative, once downloaded, the content will be cached and always read from cache i.e. cache will never expire
+    # If zero, cache will never be used i.e. it will expire imidiately
+    # If a positive value is used, the cache will be used until it expires
+    # In our case, we always want to use cached files since this is a show description that never changes
+    cache-lifetime: -1
+  elements:
+    - name: desc
+      locator: .mt-2 p
+      locator-strategy: csspath
+      operations:
+        - name: beautify
+          hook: after

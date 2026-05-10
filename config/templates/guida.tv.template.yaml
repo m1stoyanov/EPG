@@ -1,0 +1,44 @@
+---
+version: 1.0
+author: Hristo Genev
+timezone: Europe/Rome
+
+date-parameter:
+  format: yyyy-MM-dd
+  culture: it-IT
+
+request:
+  debug: false
+  url: https://www.guida.tv/programmi-tv/palinsesto/canale/${channelId}.html?dt=${date}
+
+programs:
+  debug: false
+  locator: table.table tr
+    
+elements:
+  - name: start
+    debug: false
+    locator: .thin
+
+  - name: title
+    debug: false
+    locator: h5 > a
+
+
+channel-parameters:
+  supertennis.it:
+    channelId: 83847273/super-tennis-hd
+  rai1.it:
+    channelId: 826573/rai-1
+  rai2.it:
+    channelId: 826550/rai-2
+  rai3.it:
+    channelId: 826550/rai-3
+  rai4.it:
+    channelId: 826550/rai-4
+  rai5.it:
+    channelId: 826550/rai-5
+  raiscuola.it:
+    channelId: 82696849/rai-scuola
+  rainews.it:
+    channelId: 825078/rai-24

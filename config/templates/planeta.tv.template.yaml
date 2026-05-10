@@ -1,0 +1,50 @@
+---
+version: 1.0
+author: Hristo Genev
+culture: bg-BG
+enabled: true # due to buggy website
+
+date-parameter:
+  format: dddd
+  culture: bg-BG
+
+request:
+  url: http://planeta.tv/schedule/schedule_${channelId}
+  debug: true
+  delay-between-request-retries: 3000
+  request-retries: 5
+  operations:
+    - name: remove-after
+      hook: after
+      arguments: [ "<!-- SIDEBAR -->" ]
+      debug: false
+    - name: remove-before
+      hook: after
+      arguments: [ "${date.capitalize()}" ]
+      debug: false
+
+programs:
+  locator: p
+  debug: true
+
+elements:
+
+  - name: start
+    debug: true
+    locator-strategy: regex
+    locator: \d{1,2}\.\d\d
+    time-format: H\.mm
+
+  - name: title
+    operations:
+      - name: regex-remove
+        hook: after
+        arguments: [ '\d{1,2}\.\d\d \- ' ]
+
+channel-parameters:
+  planetatv.bg:
+    channelId: planeta_tv
+  planeta4k.bg:
+    channelId: planeta_tv_4k
+  planetafolk.bg:
+    channelId: planeta_folk

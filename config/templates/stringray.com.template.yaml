@@ -1,0 +1,35 @@
+---
+version: 1.0
+author: Hristo Genev
+
+date-parameter:
+  format: yyyy-MM-dd
+
+request:
+  url: https://iconcerts.stingray.com/en/BG/schedule/getDate?date=${date}
+  debug: true
+  headers:
+    Cookie: stingray={"countryId":"46","languageId":"en","providerId":"9933","channelId":"CON001"}
+
+programs:
+  locator: .item
+
+elements:
+  - name: start
+    locator: .time
+    
+  - name: subTitle
+    locator: .item div:nth-of-type(2) div:nth-of-type(2)
+
+  - name: title
+    locator: .title
+    operations:
+      - name: append
+        arguments: [ " ${subTitle}" ]
+        conditinos: [ argument-not-empty ]
+
+  - name: desc
+    locator: .description
+    operations: 
+      - name: beautify
+        
