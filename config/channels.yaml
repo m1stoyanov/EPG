@@ -3456,7 +3456,6 @@
   sources:
   - tvprofil.com
   - start.bg
-  - dnes.bg
   
 - id: ekids.bg
   enabled: true

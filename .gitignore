@@ -2,7 +2,6 @@
 *.ini
 logs/
 temp/
-bin/
 output.txt
 .DS_Store
 DS_Store

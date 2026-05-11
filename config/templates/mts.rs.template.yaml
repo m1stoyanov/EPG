@@ -2,6 +2,7 @@
 version: 1.0
 author: Hristo Genev
 timezone: UTC
+enabled: false
 
 date-parameter:
   format: yyyy-MM-dd

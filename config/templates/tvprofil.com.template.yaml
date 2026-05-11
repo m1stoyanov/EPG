@@ -2,7 +2,7 @@
 version: 1.0
 author: Hristo Genev
 timezone: Europe/Sofia
-enabled: true
+enabled: false
 
 date-parameter:
   format: yyyy-MM-dd
