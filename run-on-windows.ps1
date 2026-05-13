@@ -69,13 +69,13 @@ if ($LASTEXITCODE -eq 0) {
 
 Write-Host "[SUCCESS] Operation completed at $(Get-Date)" -ForegroundColor Green
 
-# Get current script directory
-$AppDir = $PSScriptRoot
+Copy-Item report.js -Destination ..\harrygg.github.io\EPG\report.js
+Write-Host "[LOG] Copied report.js to repository dir" -ForegroundColor Cyan
 
 # Navigate to the sibling directory (equivalent to %APPDIR%..\harrygg.github.io)
 $RepoDir = Join-Path -Path $AppDir -ChildPath "..\harrygg.github.io"
 
-Write-Host "[LOG] Moving to repository: $RepoDir" -ForegroundColor Cyan
+Write-Host "[LOG] Moving to repository dir: $RepoDir" -ForegroundColor Cyan
 Set-Location -Path $RepoDir
 
 # Execute Git commands

@@ -5,3 +5,8 @@ temp/
 output.txt
 .DS_Store
 DS_Store
+*.xml.gz
+*.epg.xml
+epg.xml
+*.log
+report.js
