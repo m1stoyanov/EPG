@@ -9,4 +9,4 @@ DS_Store
 *.epg.xml
 epg.xml
 *.log
-report.js
+report*

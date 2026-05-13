@@ -48,8 +48,9 @@ Write-Host "[LOG] Checking for yesterday's release ($TagYesterday)..."
 gh release view $TagYesterday 2>$null
 
 if ($LASTEXITCODE -eq 0) {
-    Write-Host "[LOG] Found yesterday's release. Deleting..." -ForegroundColor Yellow
-    gh release delete $TagYesterday --yes
+    Write-Host "[LOG] Found yesterday's release. Deleting $TagYesterday ..." -ForegroundColor Yellow
+    $DeleteResult = gh release delete $TagYesterday --yes --cleanup-tag
+	Write-Host "GitHub Response: $DeleteResult" -ForegroundColor Green
 } else {
     Write-Host "[LOG] No release found for yesterday. Skipping cleanup."
 }
