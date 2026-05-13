@@ -1,135 +1,440 @@
 author: Hristo Genev
 
 date-parameter:
-  format: dddd
-  culture: bg-BG
+  format: list
+  list: [monday, tuesday, wednesday, thursday, friday, saturday, sunday]
 
 request:
   debug: false
-  url: https://www.xn----8sbafg9clhjcp.bg/tv/${channelId}/${date.capitalize()}
+  url: https://tv-programa.bg/${channelId}/${date}
 
 programs:
-  locator: .programTable > tbody > tr
-  exclude-first: 1
-  exclude-last: 0
-    
+  locator: table.table-program > tbody > tr
+
 elements:
   - name: start
-    time-format: HH:mm
-    locator: .programTime
+    attribute: data-start
+    time-format: yyyy-MM-ddTHH:mm:sszzz
+
+  - name: stop
+    attribute: data-end
+    time-format: yyyy-MM-ddTHH:mm:sszzz
 
   - name: title
     language: bg
-    locator: td > a
+    locator: .program-title > strong
     operations:
       - name: beautify
         hook: after
 
-  - name: detailsUrl
-    debug: false
-    locator: td > a
-    attribute: href
-
-program-details:
-  enabled: ${programDetailsEnabled}
-  request: 
-    url: https://www.xn----8sbafg9clhjcp.bg/predavane${detailsUrl}
-
-  elements:
-    - name: desc
-      locator: .filmInfo
-      debug: false
-      operations:
+  - name: desc
+    language: bg
+    locator: .program-desc.desc > i
+    operations:
       - name: beautify
         hook: after
 
 timeouts:
   between-requests: 1
 
-global-parameters:
-  programDetailsEnabled: false
-
-channel-parameters: 
-  theworld.bg:
-    channelId: the-world
-  moviestar.bg:
-    channelId: moviestar
-    programDetailsEnabled: true
-  cinemania.bg:
-    channelId: cinemania
-    programDetailsEnabled: true
-  epicdrama.bg:
-    channelId: epic-drama
+channel-parameters:
+  24kitchen.bg:
+    channelId: 24-kitchen
+  360tunebox.bg:
+    channelId: 360-tunebox
+  78tv.bg:
+    channelId: 7-8-tv
+  agrotv.bg:
+    channelId: agro-tv
+  amc.bg:
+    channelId: amc
+  animalplanet.bg:
+    channelId: animal-planet
+  antena3.bg:
+    channelId: antena-3
+  automotorsport.bg:
+    channelId: auto-motor-sport
   axn.bg:
     channelId: axn
-  hbo.bg:
-    channelId: hbo
-  hbo2.bg:
-    channelId: hbo-comedy
-  hbo3.bg:
-    channelId: hbo-3
-  cinemax1.bg:
+  axnblack.bg:
+    channelId: axn-black
+  axnwhite.bg:
+    channelId: axn-white
+  babytv.bg:
+    channelId: baby-tv
+  balkanika.bg:
+    channelId: balkanika
+  beinmovies.bg:
+    channelId: bein-movies
+  bgmusicch.bg:
+    channelId: bg-music-ch
+  bgplus.bg:
+    channelId: bg-plus
+  bhtv.bg:
+    channelId: bhtv
+  bloomberg.bg:
+    channelId: bloomberg
+  bloombergbg.bg:
+    channelId: bloomberg-bg
+  bnt1.bg:
+    channelId: bnt-1
+  bnt2.bg:
+    channelId: bnt-2
+  bnt3.bg:
+    channelId: bnt-3
+  bnt4.bg:
+    channelId: bnt-4
+  boxtv.bg:
+    channelId: box-tv
+  btv.bg:
+    channelId: btv
+  btvaction.bg:
+    channelId: btv-action
+  btvcinema.bg:
+    channelId: btv-cinema
+  btvcomedy.bg:
+    channelId: btv-comedy
+  btvstory.bg:
+    channelId: btv-story
+  bulgaria24.bg:
+    channelId: bulgaria-24
+  bulgariaonair.bg:
+    channelId: bulgariaonair
+  cmusic.bg:
+    channelId: c-music
+  cartoonnetwork.bg:
+    channelId: cartoon-network
+  cartoonito.bg:
+    channelId: cartoonito
+  chasseandpeche.bg:
+    channelId: chasse-and-peche
+  cinetwork.bg:
+    channelId: ci-network
+  cinemania.bg:
+    channelId: cinemania
+  cinemax.bg:
     channelId: cinemax
   cinemax2.bg:
     channelId: cinemax-2
-  hobbytv.bg:
-    channelId: hobi
+  cinestaraandt.bg:
+    channelId: cinestar-aandt
+  cinestartv.bg:
+    channelId: cinestar-tv
+  citytv.bg:
+    channelId: city-tv
+  clubmtv.bg:
+    channelId: club-mtv
+  cnbc.bg:
+    channelId: cnbc
+  cnn.bg:
+    channelId: cnn
+  codefashiontv.bg:
+    channelId: code-fashion-tv
+  codehealthtv.bg:
+    channelId: code-health-tv
+  comedycentral.bg:
+    channelId: comedy-central
+  crimeandinvestigation.bg:
+    channelId: crime-and-investigation
+  ctcint.bg:
+    channelId: ctc-int
+  ctckids.bg:
+    channelId: ctc-kids
+  currenttime.bg:
+    channelId: current-time
+  davincilearning.bg:
+    channelId: da-vinci-learning
+  deluxelounge.bg:
+    channelId: deluxe-lounge
+  deluxemusic.bg:
+    channelId: deluxe-music
+  detskijmirteleklub.bg:
+    channelId: detskij-mir-teleklub
+  diema.bg:
+    channelId: diema
+  diemafamily.bg:
+    channelId: diema-family
+  diemasport.bg:
+    channelId: diema-sport
+  diemasport2.bg:
+    channelId: diema-sport-2
+  diemasport24k.bg:
+    channelId: diema-sport-2-4k
+  diemasport3.bg:
+    channelId: diema-sport-3
+  diemasport34k.bg:
+    channelId: diema-sport-3-4k
+  discoverychannel.bg:
+    channelId: discovery
+  disneychannel.bg:
+    channelId: disney
+  disneyjunior.bg:
+    channelId: disney-junior
+  dizi.bg:
+    channelId: dizi
+  dmsat.bg:
+    channelId: dm-sat
   docubox.spiintl.com:
     channelId: docubox
-  hgtv.com:
-    channelId: hgtv
-  cartoonito.bg:
-    channelId: cartoonito
-  filmboxstars.com:
-    channelId: filmbox-stars
-    programDetailsEnabled: true
-  filmboxextras.com:
-    channelId: filmbox-extras
-    programDetailsEnabled: true
+  domashniy.bg:
+    channelId: domashniy
+  domkinopremium.bg:
+    channelId: domkino-premium
+  dstv.bg:
+    channelId: dstv
+  ducktv.bg:
+    channelId: duck-tv
+  dw.bg:
+    channelId: dw
+  ekids.bg:
+    channelId: ekids
+  englishclubtv.bg:
+    channelId: english-club-tv
+  epicdrama.bg:
+    channelId: epic-drama
+  euronews.com:
+    channelId: euronews
+  euronewsbg.bg:
+    channelId: euronews-bg
+  eurosport1.bg:
+    channelId: eurosport-1
+  eurosport2.bg:
+    channelId: eurosport-2
+  eurosport4k.bg:
+    channelId: eurosport-4k
+  evrokom.bg:
+    channelId: evrokom
+  fashiontv.bg:
+    channelId: fashion-tv
+  fashionbox.bg:
+    channelId: fashionbox
+  fastandfun.bg:
+    channelId: fast-and-fun
+  fenfolktv.bg:
+    channelId: fen-folk-tv
+  fentv.bg:
+    channelId: fen-tv
+  fightbox.bg:
+    channelId: fightbox
+  fightklub.bg:
+    channelId: fightklub
   filmbox.com:
     channelId: filmbox
-    programDetailsEnabled: true
-  tlc.bg:
-    channelId: tlc
-  travelchannel.bg:
-    channelId: travel-channel
+  filmboxarthouse.bg:
+    channelId: filmbox-arthouse
+  filmboxextras.com:
+    channelId: filmbox-extra
+  filmboxstars.com:
+    channelId: filmbox-stars
+  fishingandhunting.tv:
+    channelId: fishing-and-hunting
+  folklor.bg:
+    channelId: folklor
+  foodnetwork.com:
+    channelId: food-network
+  france24.bg:
+    channelId: france-24
+  freedom.bg:
+    channelId: freedom
+  fueltv.bg:
+    channelId: fuel-tv
+  funboxu.bg:
+    channelId: funbox-u
+  gametoon.bg:
+    channelId: gametoon
+  grand.bg:
+    channelId: grand
+  grand2.bg:
+    channelId: grand-2
+  haberturk.bg:
+    channelId: haber-turk
+  hbo.bg:
+    channelId: hbo
+  hbo2.bg:
+    channelId: hbo-2
+  hbo3.bg:
+    channelId: hbo-3
+  hgtv.com:
+    channelId: hgtv
+  historytv.com:
+    channelId: history
+  history2.bg:
+    channelId: history-2
+  hitmix.bg:
+    channelId: hit-mix
+  hobbytv.bg:
+    channelId: hobi-tv
+  iconcerts.bg:
+    channelId: iconcerts
+  investigationdiscoveryextra.bg:
+    channelId: id-extra
+  idj.bg:
+    channelId: idj
+  idjkids.bg:
+    channelId: idj-kids
+  investigationdiscovery.bg:
+    channelId: investigation-discovery
+  jimjam.bg:
+    channelId: jim-jam
+  kanal7.bg:
+    channelId: kanal-7
+  karusel.bg:
+    channelId: karusel
+  khl.bg:
+    channelId: khl
+  kinonova.bg:
+    channelId: kino-nova
+  luxe4ktv.bg:
+    channelId: luxe-4k-tv
+  magictv.bg:
+    channelId: magic-tv
+  maxsport1.bg:
+    channelId: max-sport-1
+  maxsport2.bg:
+    channelId: max-sport-2
+  maxsport3.bg:
+    channelId: max-sport-3
+  maxsport4.bg:
+    channelId: max-sport-4
+  mediaset.bg:
+    channelId: mediaset
+  motorvisiontv.bg:
+    channelId: motorvision-tv
+  moviestar.bg:
+    channelId: moviestar
+  mtv.bg:
+    channelId: mtv
+  mtv00s.bg:
+    channelId: mtv-00s
+  mtv80s.bg:
+    channelId: mtv-80s
+  mtv90s.bg:
+    channelId: mtv-90s
+  mtvhits.bg:
+    channelId: mtv-hits
+  mtvlive.bg:
+    channelId: mtv-live
+  myzentv.bg:
+    channelId: myzen-tv
+  nasekino.bg:
+    channelId: nase-kino
+  nashatv.bg:
+    channelId: nasha-tv
+  natgeowild.bg:
+    channelId: nat-geo-wild
+  nationalgeographic.bg:
+    channelId: national-geographic
+  nick.tv:
+    channelId: nick-junior
   nickelodeon.tv:
     channelId: nickelodeon
   nicktoons.tv:
     channelId: nicktoons
-  nick.tv:
-    channelId: nick-jr
-  disneychannel.bg:
-    channelId: disney
-  cartoonnetwork.tv:
-    channelId: cartoon-network
-  thevoice.bg:
-    channelId: the-voice
-  mezzo.tv:
-    channelId: mezzo
-  planetatv.bg:
-    channelId: planeta
-  ekids.bg:
-    channelId: ekids
-  discoverychannel.bg:
-    channelId: discovery
-  investigationdiscovery.bg:
-    channelId: id
-  investigationdiscoveryextra.bg:
-    channelId: id-xtra
-  historytv.com:
-    channelId: history
-  btvstory.bg:
-    channelId: btv-story
-  btvcinema.bg:
-    channelId: btv-cinema
-  btvaction.bg:
-    channelId: btv-action
-  tv1.bg:
-    channelId: tv1
   nostalgia.bg:
     channelId: nostalgia
+  nova.bg:
+    channelId: nova
+  novanews.bg:
+    channelId: nova-news
+  novasport.bg:
+    channelId: nova-sport
+  peretsint.bg:
+    channelId: perets-int
+  pickboxtv.bg:
+    channelId: pickbox-tv
+  planetatv.bg:
+    channelId: planeta
+  planeta4k.bg:
+    channelId: planeta-4k
+  planetafolk.bg:
+    channelId: planeta-folk
+  pptv.bg:
+    channelId: pptv
+  publictelevisionofarmenia.bg:
+    channelId: public-television-of-armenia
+  ribalkaiohota.bg:
+    channelId: ribalka-i-ohota
+  ringbg.bg:
+    channelId: ring-bg
+  rodinatv.bg:
+    channelId: rodina-tv
+  rtl.bg:
+    channelId: rtl
+  rtvi.bg:
+    channelId: rtvi
+  russiantravelguideint.bg:
+    channelId: russian-travel-guide-int
+  shanson.bg:
+    channelId: shanson
+  showmax.bg:
+    channelId: show-max
+  showturk.bg:
+    channelId: show-turk
+  skat.bg:
+    channelId: skat
+  soulandpepper.bg:
+    channelId: soul-and-pepper
+  starchannel.bg:
+    channelId: star-channel
+  starcrime.bg:
+    channelId: star-crime
+  starlife.bg:
+    channelId: star-life
+  supertoons.bg:
+    channelId: super-toons
+  tankovfolk.bg:
+    channelId: tankov-folk
+  tgcom24.bg:
+    channelId: tg-com-24
+  thevoice.bg:
+    channelId: the-voice
+  theworld.bg:
+    channelId: the-world
+  tlc.bg:
+    channelId: tlc
+  travelchannel.bg:
+    channelId: travel-channel
+  traveltv.bg:
+    channelId: travel-tv
+  trofey.bg:
+    channelId: trofey
+  trtworld.bg:
+    channelId: trt-world
+  tv1.bg:
+    channelId: tv-1
+  tv1000russiankinoglobal.bg:
+    channelId: tv-1000-russian-kino-global
+  tv5monde.bg:
+    channelId: tv-5-monde
+  tv8.bg:
+    channelId: tv-8
+  tv999.bg:
+    channelId: tv-999
+  tvtourism.bg:
+    channelId: tv-tourism
+  tve.bg:
+    channelId: tve
+  tvrinternational.bg:
+    channelId: tvr-international
+  viasatexplore.bg:
+    channelId: viasat-explore
+  viasathistory.bg:
+    channelId: viasat-history
+  viasatkino.bg:
+    channelId: viasat-kino
+  viasatnature.bg:
+    channelId: viasat-nature
   vivacomarena.bg:
     channelId: vivacom-arena
-  foodnetwork.com:
-    channelId: food-network
+  vox.bg:
+    channelId: vox
+  vtk.bg:
+    channelId: vtk
+  wildtv.bg:
+    channelId: wild-tv
+  wness.bg:
+    channelId: wness
+  yabantv.bg:
+    channelId: yaban-tv
+  zivi.bg:
+    channelId: zivi
